@@ -51,7 +51,7 @@ angular.module('halanxApp')
 setInterval(function(){
   var promise = dashboard.DashCallRealTime(token);
   promise.then(function(data){
-    console.log(data);
+    // console.log(data);
     $scope.paid = data.data.paid;
     $scope.pending = data.data.pending;
     localStorage.setItem("paid_amount",data.data.paid);
