@@ -18,6 +18,7 @@ angular.module('halanxApp')
     $scope.edit_msg = "";
     var sid;
     var flag = true;
+    $scope.lodRip = false;
     $scope.cancelBtn = true;
     $scope.loadMore_c = false;
     $scope.BTN = "Edit";
@@ -37,6 +38,8 @@ angular.module('halanxApp')
         data.data.items[i].dt = getDate(data.data.items[i].delivery_time)+" & "+formatAMPM(data.data.items[i].delivery_time);
       }
       $scope.dashdata = data.data.items;
+      $scope.storeName = data.data.store_name;
+      $scope.lodRip = true;
 
       
       console.log("data is:",data.data.items);
@@ -44,6 +47,25 @@ angular.module('halanxApp')
       console.log(err);
     })
 // DashCall
+
+setInterval(function(){
+  var promise = dashboard.DashCallRealTime(token);
+  promise.then(function(data){
+    console.log(data);
+    $scope.paid = data.data.paid;
+    $scope.pending = data.data.pending;
+    localStorage.setItem("paid_amount",data.data.paid);
+    localStorage.setItem("pending_amount",data.data.pending);
+    for(var i=0;i<data.data.items.length;i++){
+      data.data.items[i].placing_time = getDate(data.data.items[i].placing_time)+" & "+formatAMPM(data.data.items[i].placing_time);
+      data.data.items[i].dt = getDate(data.data.items[i].delivery_time)+" & "+formatAMPM(data.data.items[i].delivery_time);
+    }
+    $scope.dashdata = data.data.items;
+  },function(err){
+    console.log(err);
+  })
+  }, 10000);
+
     $scope.visit = ()=>{
       $window.location.assign("#business");
       $window.location.reload();
