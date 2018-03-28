@@ -39,7 +39,7 @@ angular.module('halanxApp')
             }
           }).then(function(data){
 					pr.resolve(data);
-                    console.log("Data Posted",data);
+                    // console.log("Data Posted",data);
 				}
 					,function(err){
 					pr.reject(err);	
