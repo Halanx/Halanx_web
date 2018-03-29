@@ -149,7 +149,7 @@ $scope.$on('$viewContentLoaded', function(){
         for(var i=0;i<data.length;i++){
                      for(var j=0;j<data[i].order_items.length;j++){
                         //  data[i].Total = data[i].Total.toFixed(2);
-                          if(data[i].order_items[j].IsDelivered==true || data[i].IsCancelled==true){
+                          if(data[i].IsDelivered==true || data[i].IsCancelled==true){
                             //   console.log(data[i]);
                               if(data[i].IsDelivered == true){
                                   data[i].order_status = "Delivered";
