@@ -138,7 +138,7 @@ showMeData();
           data.results[i].disable = true;
         }
          if(data.previous==null){
-        $scope.products = data.results;
+            $scope.products = data.results;
          }
          else{
            data.results.forEach(function(element) {
@@ -146,9 +146,33 @@ showMeData();
            }, this);
          }
         console.log($scope.products);
+        $scope.tempProducts = $scope.products;
       },(err)=>{
         console.log("err");
       });
+    }
+
+    $scope.searchProVal = "";
+    $scope.searchPro = () => {
+      var len = $scope.searchProVal.length;
+      $scope.productsSer = [];
+      if(len == 0) {
+        $scope.getProduct();
+        $scope.searchMsg = "";
+      } else {
+      $scope.tempProducts.forEach(element => {
+        if((element.ProductName.slice(0, len)).toLowerCase() == ($scope.searchProVal).toLowerCase()) {
+          $scope.productsSer.push(element); 
+          console.log(element.ProductName);
+        }
+      });
+      if($scope.productsSer.length == 0) {
+        $scope.searchMsg = "No Products found";
+      } else {
+        $scope.searchMsg = $scope.productsSer.length + " item(s) found.";
+      }
+    }
+      console.log($scope.searchProVal);
     }
 
     $scope.edit = (product)=>{
