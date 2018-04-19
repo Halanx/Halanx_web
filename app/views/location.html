@@ -63,7 +63,7 @@ body {
   }
 }
  #infoPanel {
-     
+     margin-right: 10px;
     margin-left: 10px;
   }
   #infoPanel div {
@@ -95,16 +95,118 @@ body {
     background: black;
 }
 
-        
-        
-  
+.panel-heading {
+    font-family: "Titillium Web", sans-serif;
+    font-weight: 600;
+    margin: 0;
+    background: #e63631 !important;
+    padding-top: 22px;
+    padding-bottom: 20px;
+    padding-left: 20px;
+    box-shadow: 0 -3px 5px -3px rgba(0,0,0,0.06) inset;
+} 
+
+.enter-d-a{
+  border-top: 1px solid #e7e7e7;
+  padding-top: 20px;
+}
+
+.panel-heading .panel-title {
+  font-size: 18px;
+    margin-left: 6px;
+
+}
+
+.cnt-btn {
+    border-radius: 4px;
+    padding: 8px 30px;
+    background: #ed3833;
+    border: none;
+    color: #fafafa;
+    box-shadow: 0 2px 2px 0 rgba(0,0,0,0.14), 0 3px 1px -2px rgba(0,0,0,0.12), 0 1px 5px 0 rgba(0,0,0,0.2);
+    transition: all 0.4s cubic-bezier(0.49, 0.18, 0.29, 0.81);
+}
+
+.cnt-btn:hover {
+  color: #fff;
+    background: #ec4f4b;
+    box-shadow: 0 3px 4px 0 rgba(0,0,0,0.18), 0 3px 10px -5px rgba(0,0,0,0.16), 0 1px 15px 0 rgba(0,0,0,0.5);
+}
+
+.panel-info {
+  border: none;
+    background-color: #fff;
+    border-radius: 3px;
+    box-shadow: 0 5px 10px rgba(0,0,0,.3);
+}
+
+#searchTextField {
+  box-shadow: 0 2px 2px 0 rgba(0,0,0,0.16), 0 0 0 1px rgba(0,0,0,0.08);
+    border-radius: 2px;
+    border: none;
+    height: 40px;
+}
+
+.search-btn {
+  padding: 9px 12px;
+    margin-top: -1px;
+    background: #e52222;
+}
+
+.search-btn i {
+  font-size: 18px;
+  color: #fff;
+}
+
+.loc-input {
+  border-radius: 0px;
+    border: none;
+    margin-bottom: 10px;
+    border-bottom: 1px solid #e1e1e1;
+    box-shadow: none;
+    outline:  none;
+    padding-left: 10px;
+}
+
+.loc-input:focus {
+    box-shadow: none;
+    outline:  none;
+    border-bottom: 2px solid #ed3833;
+}
+
+.loc-input-label {
+    min-width: 119px;
+    color: #555;
+    border: none !important;
+    background: #eee;
+    border-radius: 0;
+}
+
+@media (max-width: 767px) {
+
+    #login-btn {
+        margin-top: -2px;
+    }
+}
+
+@media (max-width: 550px) {
+    #login-btn {
+        border-bottom: none;
+        padding-right: 40px;
+        padding-top: 22px;
+    }
+    .cnt-btn {
+        margin-right: -15px;
+    }
+}
+
 
 </style>
     
         <div class="container">    
-        <div id="loginbox" style="margin-top:100px;" class="mainbox col-md-6 col-md-offset-3 col-sm-8 col-sm-offset-2">                    
+        <div id="loginbox" style="margin-top:65px;" class="mainbox col-md-6 col-md-offset-3 col-sm-8 col-sm-offset-2">                    
             <div class="panel panel-info" >
-                    <div class="panel-heading" style="background:rgb(200,65,62) !important;">
+                    <div class="panel-heading">
                         <div class="panel-title" style="color:white">Enter Delivery Location</div>
                      </div>     
                      <div id="infoPanel">
@@ -121,7 +223,7 @@ body {
                                    
                                 <input id="searchTextField" class="form-control" type="text" placeholder="Enter Delivery Location" ng-model="one">
    				<span class="input-group-btn">
-   				<button class="btn btn-danger btn-md" type="button">
+   				<button class="btn search-btn btn-md" type="button">
    				<i class="glyphicon glyphicon-search"></i>
    				</button>
    				</span>
@@ -129,7 +231,7 @@ body {
                                    </div>
                                     </div>
                                 
-                            <div style="margin-bottom: 25px; width:100%;" class="input-group container">
+                            <div style="margin-bottom: 25px; width:103%;" class="input-group container">
                             <div id="mapCanvas"></div>
 
                                     </div>
@@ -233,7 +335,7 @@ updateMarkerPosition(marker.getPosition());
 
                             
 <!--                              <div class="panel-heading">-->
-                        <div class="panel-title">Enter Delivery Address</div>
+                        <div class="panel-title enter-d-a">Enter Delivery Address: </div>
 <!--                     </div>  -->
                             <br>
                             <!--action="https://www.halanx.com/halanx-final/new1big-kfc/summary/summary.html"-->
@@ -241,25 +343,25 @@ updateMarkerPosition(marker.getPosition());
                             <div style="margin-bottom: 25px" class="input-group">
                             
                                        
-                                        <span class="input-group-addon" style="color:black;min-width: 119px;">House Number</span>
-                                        <input type="text" class="form-control" id="flatnumber"  ng-model="two">
+                                        <span class="input-group-addon loc-input-label">House Number</span>
+                                        <input type="text" class="form-control loc-input" id="flatnumber"  ng-model="two">
                                     </div>
                             <div style="margin-bottom: 25px" class="input-group">
                             
                                        
-                                        <span class="input-group-addon" style="color:black;min-width: 119px;">Locality</span>
-                                        <input type="text" class="form-control" id="area" size="50"  required ng-model="three">
+                                        <span class="input-group-addon loc-input-label">Locality</span>
+                                        <input type="text" class="form-control loc-input" id="area" size="50"  required ng-model="three">
                                     </div>
                             <div style="margin-bottom: 25px" class="input-group">
                             
                                        
-                                        <span class="input-group-addon" style="color:black;min-width: 119px;">City</span>
-                                        <input type="text" class="form-control" id="city"  size="50" required  ng-model="four">
+                                        <span class="input-group-addon loc-input-label">City</span>
+                                        <input type="text" class="form-control loc-input" id="city"  size="50" required  ng-model="four">
                                     </div> 
                                                            
                              <div class="col-sm-12 controls" style="text-align:Center">
                                     
-                                      <button type="submit" class="btn btn-danger btn-md b1" id="submit" ng-click="postreq()">Continue</button>
+                                      <button type="submit" class="btn btn-md b1 cnt-btn" id="submit" ng-click="postreq()">Continue</button>
                                       <br>
                                       <span style="color:red !important;">{{message}}</span>
                             </div>    

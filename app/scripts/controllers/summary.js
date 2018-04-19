@@ -40,7 +40,7 @@ angular.module('halanxApp')
   
   $scope.payment = ()=>{
     if(localStorage.getItem("amount") !=null && $scope.cost.Total != undefined){
-      $window.location = "../../payment.php";
+      $window.location = "/#/payment";
     }
   }
   });

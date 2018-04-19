@@ -201,6 +201,16 @@ angular
         controller: 'CareerCtrl',
         controllerAs: 'career'
       })
+      .when('/refundpolicy', {
+        templateUrl: 'views/refundpolicy.html',
+        controller: 'CareerCtrl',
+        controllerAs: 'career'
+      })
+      .when('/payment', {
+        templateUrl: 'views/payment.html',
+        controller: 'PaymentCtrl',
+        controllerAs: 'payment'
+      })
       .otherwise({
         redirectTo: '/login'
       });
