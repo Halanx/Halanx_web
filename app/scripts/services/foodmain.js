@@ -61,18 +61,13 @@ angular.module('halanxApp')
          )
          return pr.promise
     },
-        storeserver: function (id, token) {
+        storeserver: function (id) {
             console.log(id)
             var pr = $q.defer();
             var url = "https://api.halanx.com/stores/" + id;
 
             console.log(url)
-            $http.get(url, {
-                //                withCredentials: true,
-                                headers: {
-                                    'Authorization': 'Token ' + token 
-                                }
-                    }).then(function (data) {
+            $http.get(url).then(function (data) {
                     pr.resolve(data.data)
                     console.log("success")
 

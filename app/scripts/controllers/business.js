@@ -102,8 +102,6 @@ angular.module('halanxApp')
        
     }
 
-    
-
     $scope.submitbankform = ()=>{
           // if(localStorage.token){
             // var token = localStorage.getItem("store_token");
@@ -133,11 +131,10 @@ angular.module('halanxApp')
     function returnTime(a){
 
     let date = new Date(a);
-   
     if(date.toLocaleTimeString() == "Invalid Date"){
         return "";
     }
-    return date.toTimeString().substr(0,8);
+    return date.toLocaleTimeString();
 
 } 
 
@@ -202,7 +199,23 @@ angular.module('halanxApp')
               },
               
           ]
-        
+        //   obj2 = {
+        //     'MondayOpeningTime': returnTime($scope.hxpadata.MondayOpeningTime),
+        //     'TuesdayOpeningTime': returnTime($scope.hxpadata.TuesdayOpeningTime),
+        //     'WednesdayOpeningTime': returnTime($scope.hxpadata.WednesdayOpeningTime),
+        //     'ThursdayOpeningTime': returnTime($scope.hxpadata.ThursdayOpeningTime),
+        //     'FridayOpeningTime': returnTime($scope.hxpadata.FridayOpeningTime),
+        //     'SaturdayOpeningTime': returnTime($scope.hxpadata.SaturdayOpeningTime),
+        //     'SundayOpeningTime': returnTime($scope.hxpadata.SundayOpeningTime),
+        //     'MondayClosingTime': returnTime($scope.hxpadata.MondayClosingTime),
+        //     'TuesdayClosingTime': returnTime($scope.hxpadata.TuesdayClosingTime),
+        //     'WednesdayClosingTime': returnTime($scope.hxpadata.WednesdayClosingTime),
+        //     'ThursdayClosingTime': returnTime($scope.hxpadata.ThursdayClosingTime),
+        //     'FridayClosingTime': returnTime($scope.hxpadata.FridayClosingTime),
+        //     'SaturdayClosingTime': returnTime($scope.hxpadata.SaturdayClosingTime),
+        //     'SundayClosingTime': returnTime($scope.hxpadata.SundayClosingTime)
+        //   }
+
           console.log(obj2)
           
             var promise = business.dateTime(data_transfer,token);
