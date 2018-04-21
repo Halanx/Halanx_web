@@ -8,28 +8,29 @@
  * Factory in the halanxApp.
  */
 angular.module('halanxApp')
-  .factory('forgetpass', function ($http, $q) {
-   	var obj = {
+  .factory('forgetpass', function ($http, $q,$window) {
+   	var object = {
 		arr: [],
 		callserver: function (obj) {
-			console.log(obj);	
+			console.log(obj)
 			var pr = $q.defer();
-			var url = "https://api.halanx.com/users/getotp/"+ obj.firstname + "/";
+			var url = "https://api.halanx.com/users/getotp/"+obj.username+"/";
 
+					$http.post(url,obj).then(function(data){
+					pr.resolve(data.data);
+					console.log("OTP Received",data);
+                    //alert(data.data);
+                    $window.location.href='#/forgetpassotp';
 
-			$http.get(url).then(function (data) {
-				pr.resolve(data.data)
-				console.log("data is:",data);
-
-			},
+				},
 				function (err) {
-					pr.reject(err)
-					console.log("error")
-
+					pr.reject(err);
+					console.log("error");
+					 
 				}
-			)
-			return pr.promise
+			);
+			return pr.promise;
 		}
 	}
-	return obj;
+	return object;
   });

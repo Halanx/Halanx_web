@@ -1,31 +1,26 @@
 'use strict';
 
-/**
- * @ngdoc function
- * @name halanxApp.controller:ForgetpassCtrl
- * @description
- * # ForgetpassCtrl
- * Controller of the halanxApp
- */
+ 
 angular.module('halanxApp')
-  .controller('ForgetpassCtrl', function ($scope,forgetpass,$window) {
+  .controller('ForgetpassCtrl', function ($scope,forgetpass) {
        
     $scope.submitform = ()=>{
     
         var obj = {};
         
-        obj.firstname=$scope.firstname;
-        obj.username= $scope.mobilenumber;
+        obj.FirstName=$scope.firstname;
+        obj.username =$scope.mobilenumber;
         
          
         console.log(obj)
+    
        
           var promise = forgetpass.callserver(obj);
           promise.then((data)=>
           {
           console.log(data);
           if(data.key){
-              $window.location.assign("#/forgetpassotp");
+              $window.location.href="#/forgetpassotp";
           }
           },(err)=>{
           alert("error");

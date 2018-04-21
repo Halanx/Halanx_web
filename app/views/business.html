@@ -219,8 +219,16 @@
 .dashboard-side-menu {
     left: -75%;
     width: 70%;
+    margin-top: -30px;
     transition: all 0.5s ease-in-out;
-    padding-top: 80px;
+    padding-top: 0;
+    z-index: 99999;
+}
+
+#login-btn {
+    border: none;
+    padding-right: 35px;
+    padding-left: 35px;
 }
 
 .hxpa-dashboard .dash-head {
@@ -264,7 +272,7 @@
                 <h3 class="store-name-side">{{hxpadata.StoreName || "Loading..."}}</h3>
                 <ul>
                     <li><a data-toggle="tab" onclick="event.preventDefault(); changeloc('home');" href="#home"> <i class="fa fa-shopping-cart"></i> Dashboard</a></li>
-                    <li><a data-toggle="tab" onclick="event.preventDefault(); changeloc('menu2');" ng-click="getProduct()" href="#menu2"> <i class="fa fa-file-text-o"></i> Products</a></li>
+                    <li><a data-toggle="tab" onclick="event.preventDefault(); changeloc('menu2');" ng-click="getProduct()" href="#menu2"> <i class="fa fa-file-text-o"></i> Inventory</a></li>
                     <li><a data-toggle="tab" onclick="event.preventDefault(); changeloc('menu1');" ng-click="openMe()" href="#menu1"> <i class="fa fa-inr"></i> Payments</a></li>
                     <li><a ng-click="visit()" class="active"> <i class="fa fa-suitcase"></i> Business</a></li>
                 </ul>

@@ -1,12 +1,6 @@
 'use strict';
 
-/**
- * @ngdoc function
- * @name halanxApp.controller:ForgetpassnewCtrl
- * @description
- * # ForgetpassnewCtrl
- * Controller of the halanxApp
- */
+ 
 angular.module('halanxApp')
   .controller('ForgetpassnewCtrl', function ($scope,forgetpassnew) {
         $scope.submitform = ()=>{
@@ -18,8 +12,8 @@ angular.module('halanxApp')
         
          
         console.log(obj)
-       
-          var promise = forgetpassnew.callserver(obj);
+        var key=localStorage.getItem("key1");
+          var promise = forgetpassnew.callserver(obj,key);
           promise.then((data)=>
           {
           console.log(data);

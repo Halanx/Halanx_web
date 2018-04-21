@@ -219,18 +219,6 @@ var app = angular.module("myapp",[]);
 
 <input type="hidden" class="form-control" name="productinfo" value="null">
 
-
-    
-
-     
-      
-    
-
-
-
-
- 
-
  
 <script>
 

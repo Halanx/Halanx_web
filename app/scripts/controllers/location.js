@@ -35,13 +35,7 @@ $scope.addstore = ()=>{
      }
 
    $scope.postreq = ()=>{
-    //    console.log($scope.one);
-       if($scope.one!=undefined && $scope.two!=undefined && $scope.three!=undefined && $scope.four!=undefined){
        $window.location.assign("#summary");
-    }
-    else{
-        $scope.message = "Enter your location!";
-    }
    }  
 
   });

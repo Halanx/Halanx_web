@@ -1,12 +1,5 @@
 'use strict';
-
-/**
- * @ngdoc function
- * @name halanxApp.controller:ForgetpassotpCtrl
- * @description
- * # ForgetpassotpCtrl
- * Controller of the halanxApp
- */
+ 
 angular.module('halanxApp')
   .controller('ForgetpassotpCtrl', function ($scope,forgetpassotp) {
       
@@ -14,8 +7,9 @@ angular.module('halanxApp')
     
         var obj = {};
         
+        obj.username= "c"+ $scope.mobilenumber;
         obj.password= $scope.otp;
-        obj.username= "c" + $scope.mobilenumber;
+         
         
          
         console.log(obj)
@@ -24,8 +18,10 @@ angular.module('halanxApp')
           promise.then((data)=>
           {
           console.log(data);
+           var key=localStorage.getItem("key");
           if(data.key){
-              $window.location.href="https://www.halanx.com/halanx-final/new1big-kfc/frontpage/forgotpass2.html";
+              $window.location.href="#/forgotpassnew.html";
+
           }
           },(err)=>{
           alert("error");
