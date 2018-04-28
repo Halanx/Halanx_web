@@ -35,27 +35,44 @@ angular.module('halanxApp')
     
     function autoload()
  {
-     
-     $scope.cartproductlist = cart.load();
-     if($scope.cartproductlist!=null){
-     console.log($scope.cartproductlist)
-    $scope.totalamount   = cart.calculatetotal($scope.cartproductlist);
-    $scope.totaltax = cart.calculatetax($scope.cartproductlist);
-     localStorage.setItem("amount",$scope.totalamount);
-     localStorage.setItem("tax",$scope.totaltax);
-    if($scope.cartproductlist.length==0){
-          $scope.cartclass = true;
-          $scope.emptyclass = false;    
-    }
-     else{
-          $scope.emptyclass = true;
-     $scope.cartclass = false;
-    }
-     }
-     else{
-          $scope.emptyclass = false;
-          $scope.cartclass = true;
-    }
+
+        var token = cart.gettoken();
+
+            var promise =   cart.load(token);
+            promise.then(function(data){
+            console.log(data);
+            $scope.cartproductlist = data;
+            $scope.totalamount   = cart.calculatetotal($scope.cartproductlist);
+            if(data.length == 0) {
+                $scope.cartclass = true;
+                $scope.emptyclass = false; 
+            } else {
+                $scope.cartclass = false;
+                $scope.emptyclass = true; 
+            }
+        },function(err){
+            console.log("error loading cart items");
+    } )  
+    //  $scope.cartproductlist = cart.load();
+    //  if($scope.cartproductlist!=null){
+    //  console.log($scope.cartproductlist)
+    // $scope.totalamount   = cart.calculatetotal($scope.cartproductlist);
+    // $scope.totaltax = cart.calculatetax($scope.cartproductlist);
+    //  localStorage.setItem("amount",$scope.totalamount);
+    //  localStorage.setItem("tax",$scope.totaltax);
+    // if($scope.cartproductlist.length==0){
+    //       $scope.cartclass = true;
+    //       $scope.emptyclass = false;    
+    // }
+    //  else{
+    //       $scope.emptyclass = true;
+    //  $scope.cartclass = false;
+    // }
+    //  }
+    //  else{
+    //       $scope.emptyclass = false;
+    //       $scope.cartclass = true;
+    // }
  }
     function userid(){
         if(localStorage.token){
@@ -100,21 +117,39 @@ angular.module('halanxApp')
     }
     
    $scope.updateminus= (list)=>{
-    list.quantity--;
+    list.Quantity--;
      
        
        $scope.totalamount=cart.calculatetotal($scope.cartproductlist);
         var json = JSON.stringify($scope.cartproductlist);
           localStorage.setItem('storedata',json);
+          var token = cart.gettoken();
+
+          var promise = cart.updateproductonserver(list, token);
+           promise.then(function(data){
+               console.log("updated on server");
+           
+           },function(err){
+               console.log("error while updating on server"); 
+           } );
    }
    $scope.updateplus = (list)=>{
      
        
-       list.quantity++;
+       list.Quantity++;
       
     $scope.totalamount   = cart.calculatetotal($scope.cartproductlist);
      var json = JSON.stringify($scope.cartproductlist);
           localStorage.setItem('storedata',json);
+          var token = cart.gettoken();
+
+           var promise = cart.updateproductonserver(list, token);
+            promise.then(function(data){
+                console.log("updated on server");
+            
+            },function(err){
+                console.log("error while updating on server"); 
+            } );
    }
 
    $scope.submitcart = ()=>{
@@ -132,8 +167,8 @@ if(localStorage.token=="null"|| localStorage.token==null){
 //           obj.CartPhoneNo=mobilenumber;
                       obj.Cart = userid;
                       obj.Notes = "";
-           obj.Item = $scope.cartproductlist[i].id;
-          obj.Quantity =$scope.cartproductlist[i].quantity ;
+           obj.Item = $scope.cartproductlist[i].Item.id;
+          obj.Quantity =$scope.cartproductlist[i].Quantity ;
       var promise = cart.callserver(obj,token);
           
        promise.then(function(data){
