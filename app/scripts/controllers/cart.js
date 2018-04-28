@@ -91,20 +91,35 @@ angular.module('halanxApp')
         }
     }
 
-    $scope.deleteproduct = (list)=>{
-         console.log(list);
-       list.Active = false;
-        console.log(list);
-     var finalarr =    cart.filterfunction($scope.cartproductlist)
-     $scope.cartproductlist = finalarr;
-        $scope.totalamount = cart.calculatetotal($scope.cartproductlist);
-         var json = JSON.stringify($scope.cartproductlist);
-          localStorage.setItem('storedata',json);
-          console.log(localStorage);
-          cart.load();
-        var len = cart.cartlength($scope.cartproductlist);
-         var json = JSON.stringify(len);
-          localStorage.setItem('counter',json);
+    $scope.deleteproduct = (list, index)=>{
+    //      console.log(list);
+    //    list.Active = false;
+    //     console.log(list);
+    //  var finalarr =    cart.filterfunction($scope.cartproductlist)
+    //  $scope.cartproductlist = finalarr;
+    //     $scope.totalamount = cart.calculatetotal($scope.cartproductlist);
+    //      var json = JSON.stringify($scope.cartproductlist);
+    //       localStorage.setItem('storedata',json);
+    //       console.log(localStorage);
+    //       cart.load();
+    //     var len = cart.cartlength($scope.cartproductlist);
+    //      var json = JSON.stringify(len);
+    //       localStorage.setItem('counter',json);
+    console.log(list);
+
+    var token = cart.gettoken();
+    $scope.cartproductlist.splice(index, index+1);
+
+        var promise = cart.deleteproductserver(list, token);
+        promise.then(function(data){
+            console.log("deleted from server");
+        
+        },function(err){
+            console.log("error while deleting from server"); 
+        } );
+
+
+    console.log($scope.cartproductlist);
         if($scope.cartproductlist.length==0){
           $scope.emptyclass = false;
         $scope.cartclass = true;

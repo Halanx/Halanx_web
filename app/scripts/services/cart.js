@@ -137,6 +137,32 @@ angular.module('halanxApp')
 
     
 },
+deleteproductserver : function(list, key) {
+
+        var obj = {};
+    obj.RemovedFromCart = true;
+
+    console.log(obj);
+
+    var url = "https://api.halanx.com/carts/items/"+list.id+"/";
+    var pr = $q.defer();
+    
+    $http.patch(url,obj, {
+//             withCredentials: true,
+            headers: {
+                'Authorization': 'Token ' +key,
+                'Content-Type' : 'application/json'
+            }
+        }).then(function(data){
+        // console.log(data);
+        pr.resolve(data.data);
+    },function(err){
+        pr.reject(err);
+    })
+
+    return pr.promise;
+
+},
 
         callserver : function(obj,key){
         console.log(obj)

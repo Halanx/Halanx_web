@@ -38,10 +38,11 @@ angular.module('halanxApp')
                     localStorage.setItem('hcash',hcash);
                     localStorage.setItem('totalamount',totalwithex);
                   var value_amt = parseFloat(totalwithex);
-                  value_amt = value_amt.toFixed(2);          
+                  value_amt = value_amt.toFixed(2);   
+                  localStorage.setItem("totalamount",data.data.TotalWithExtras);       
                   $scope.cost = {
                   Total:data.data.Total,
-                  DeliveryCharges:data.data.DeliveryCharges,
+                  DeliveryCharges:data.data.EstimatedDeliveryCharges,
                   Taxes:data.data.Taxes,
                   TotalWithExtras:data.data.TotalWithExtras,
             }
