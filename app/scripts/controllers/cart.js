@@ -37,7 +37,7 @@ angular.module('halanxApp')
  {
 
         var token = cart.gettoken();
-
+        if(token!=undefined){
             var promise =   cart.load(token);
             promise.then(function(data){
             console.log(data);
@@ -52,7 +52,27 @@ angular.module('halanxApp')
             }
         },function(err){
             console.log("error loading cart items");
-    } )  
+    } );
+        }
+        else{
+            $scope.cartproductlist = [];
+            var Item = {};
+            JSON.parse(localStorage.getItem("storedata")).forEach(function(element) {
+                Item = {
+                    "Item": element
+                }
+                $scope.cartproductlist.push(Item);
+            }, this);
+    //        if($scope.cartproductlist.Item.length==0){
+    //       $scope.cartclass = true;
+    //       $scope.emptyclass = false;    
+    // }
+    //  else{
+    //      console.log($scope.cartproductlist);
+    //       $scope.emptyclass = true;
+    //  $scope.cartclass = false;
+    // }
+        }  
     //  $scope.cartproductlist = cart.load();
     //  if($scope.cartproductlist!=null){
     //  console.log($scope.cartproductlist)
