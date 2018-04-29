@@ -142,6 +142,8 @@ angular.module('halanxApp')
     console.log(list);
 
     var token = cart.gettoken();
+    console.log("token is",token);
+    if(token){
     $scope.cartproductlist.splice(index, index+1);
     localStorage.setItem("counter", parseInt(localStorage.getItem("counter"))-1);
 
@@ -161,8 +163,16 @@ angular.module('halanxApp')
             console.log("error while deleting from server"); 
         } );
 
-
-    console.log($scope.cartproductlist);
+    }
+    else{
+         $scope.cartproductlist.splice(index, index+1);
+        var storedata = JSON.parse(localStorage.getItem("storedata"));
+        storedata.splice(index, index+1);
+        localStorage.setItem("storedata",JSON.stringify(storedata));
+$scope.totalamount   = cart.calculatetotallocal($scope.cartproductlist);
+        // $scope.totalamount=cart.calculatetotallocal(JSON.parse(localStorage.getItem("storedata")));
+    }
+    // console.log($scope.cartproductlist);
         
     }
     
