@@ -30,9 +30,22 @@ angular.module('halanxApp')
           
         }
 
-        if(localStorage.getItem("storedata")!=null){
+        if(localStorage.getItem("storedata")!=null && localStorage.getItem("isLogin")==true){
+            var token = localStorage.getItem("token");
+            var storeD = JSON.parse(localStorage.getItem("storedata"));
             var counter_length = JSON.parse(localStorage.getItem("storedata")).length;
-            $scope.counter = counter_length
+            console.log(storeD);
+            storeD.forEach(element => {
+                var promise = landing.addproductonserver(element, token);
+                promise.then(function(data){
+                    console.log("added on server");
+
+                },function(err){
+                    console.log("error while saving on server"); 
+                } );
+            });
+            localStorage.removeItem("storedata");
+            $scope.counter = counter_length;
         }
          else{
             $scope.counter = 0;
