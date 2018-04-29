@@ -68,7 +68,7 @@ angular.module('halanxApp')
      var direction = JSON.parse(localStorage.getItem("obj"));
      obj.Latitude = direction.Latitude;
      obj.Longitude = direction.Longitude;
-     obj.TransactionID = d;
+     obj.TransactionID = $scope.hashData.txnid;
      obj.Total = parseFloat(totalAmount).toFixed(2);
      obj.CashOnDelivery = true;
      createHash();

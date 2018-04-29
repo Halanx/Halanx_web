@@ -77,8 +77,8 @@ angular.module('halanxApp')
         addproductonserver:function(element, key){
 
             var obj = {};
-          obj.Item = element.Item.id;
-          obj.Quantity = element.Quantity;
+          obj.Item = element.id;
+          obj.Quantity = element.quantity;
           obj.Notes = "";
 
           console.log(obj);
@@ -104,7 +104,24 @@ angular.module('halanxApp')
           
 
           
-       }
+       },
+       getcartitemserver : function(key){
+            var url = "https://api.halanx.com/carts/active/";
+            var pr = $q.defer();
+            
+            $http.get(url, {
+                headers: {
+                    'Authorization': 'Token ' + key
+                }
+            }).then(function(data){
+                console.log(data);
+                pr.resolve(data.data);
+            },function(err){
+                pr.reject(err);
+            })
+
+            return pr.promise;
+     },
     }
 
     return object;
