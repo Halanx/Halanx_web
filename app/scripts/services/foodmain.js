@@ -70,7 +70,7 @@ angular.module('halanxApp')
             $http.get(url, {
                 //                withCredentials: true,
                                 headers: {
-                                    'Authorization': 'Token ' + key 
+                                    // 'Authorization': 'Token ' + key 
                                 }
                             }).then(function (data) {
                     pr.resolve(data.data)
