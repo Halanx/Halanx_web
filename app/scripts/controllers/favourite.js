@@ -106,7 +106,8 @@ if($scope.arr=="") {
           alert("Already present in cart")
        }
         else{
-         favourite.addproduct(data)
+
+        //  favourite.addproduct(data)
        
         $scope.counter = favourite.arrlength();
             favourite.savecounter($scope.counter)
@@ -117,6 +118,16 @@ if($scope.arr=="") {
             });
            },1000);
         }
+
+        var token = favourite.gettoken();
+
+           var promise = favourite.addproductonserver(data, quantity, token);
+            promise.then(function(data){
+                console.log("added on server");
+            
+            },function(err){
+                console.log("error while saving on server"); 
+            } );
     };
 
   });

@@ -56,13 +56,17 @@ angular.module('halanxApp')
         }
         else{
             $scope.cartproductlist = [];
-            var Item = {};
+                var Item = {};
             JSON.parse(localStorage.getItem("storedata")).forEach(function(element) {
-                Item = {
-                    "Item": element,
-                    "Quantity" : element.quantity
+                if(element.Item == null) {
+                    Item = {
+                        "Item": element,
+                        "Quantity" : element.quantity
+                    }
+                    $scope.cartproductlist.push(Item);
+                } else {
+                    $scope.cartproductlist.push(element);
                 }
-                $scope.cartproductlist.push(Item);
             }, this);
             var json = JSON.stringify($scope.cartproductlist);
           localStorage.setItem('storedata',json);
@@ -144,7 +148,7 @@ angular.module('halanxApp')
     var token = cart.gettoken();
     console.log("token is",token);
     if(token){
-    $scope.cartproductlist.splice(index, index+1);
+    $scope.cartproductlist.splice(index, 1);
     localStorage.setItem("counter", parseInt(localStorage.getItem("counter"))-1);
 
         var promise = cart.deleteproductserver(list, token);
@@ -165,9 +169,9 @@ angular.module('halanxApp')
 
     }
     else{
-         $scope.cartproductlist.splice(index, index+1);
+         $scope.cartproductlist.splice(index, 1);
         var storedata = JSON.parse(localStorage.getItem("storedata"));
-        storedata.splice(index, index+1);
+        storedata.splice(index, 1);
         localStorage.setItem("storedata",JSON.stringify(storedata));
 $scope.totalamount   = cart.calculatetotallocal($scope.cartproductlist);
         // $scope.totalamount=cart.calculatetotallocal(JSON.parse(localStorage.getItem("storedata")));
