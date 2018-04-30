@@ -57,6 +57,9 @@ angular.module('halanxApp')
         else{
             $scope.cartproductlist = [];
                 var Item = {};
+                if(localStorage.getItem("storedata")==null || localStorage.getItem("storedata")==undefined) {
+                    localStorage.setItem("storedata", "[]");
+                }
             JSON.parse(localStorage.getItem("storedata")).forEach(function(element) {
                 if(element.Item == null) {
                     Item = {

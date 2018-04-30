@@ -108,8 +108,8 @@ if($scope.arr=="") {
         else{
 
         //  favourite.addproduct(data)
-       
-        $scope.counter = favourite.arrlength();
+        localStorage.setItem("counter", $scope.counter+1);
+        $scope.counter += 1;
             favourite.savecounter($scope.counter)
          Notification.requestPermission(function(){
             var n = new Notification("Halanx", {
